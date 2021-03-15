@@ -4,16 +4,14 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class DBExecutor<T> implements IExecutor<T> {
-    private static Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+    private final static Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
 
     public DBExecutor() {
     }
 
     @Override
     public T findById(Class<T> obj, Integer id) {
-        Transaction tx = session.beginTransaction();
-        T result = session.get(obj,id);
-        return result;
+        return  session.get(obj,id);
     }
 
     @Override
